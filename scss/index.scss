@@ -1,0 +1,63 @@
+body {
+  background-image: url('../assets/overworld-abstract-map.png');
+  animation: animatedBackground 40s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+@keyframes animatedBackground {
+  from { background-position: 0 0; }
+  to { background-position: 100% 100%; }
+}
+
+.container {
+  min-width: 300px;
+  border: 1px solid black;
+  background-color: whitesmoke;
+  .header {
+    background-color: #009ad7;
+    color: white;
+    padding: 10px;
+  }
+  ul {
+    list-style: none;
+    margin: 0px;
+    padding: 5px;
+    li {
+      margin: 10px 0px;
+      display: flex;
+      div:first-child {
+        flex: 1;
+      }
+      div:nth-child(2),
+      div:nth-child(3) {
+        padding: 0px 7px;
+      }
+      font-size: .9em;
+    }
+    a {
+      text-decoration: none;
+      background-color: #009ad7;
+      color: white;
+      padding: 5px;
+      border-radius: 3px;
+    }
+  }
+}
+
+.logo {
+  display: inline-block;
+  sup {
+    display: block;
+    text-align: left;
+    font-size: .7em;
+    color: #ffe46f;
+  }
+  p {
+    margin: 0px;
+  }
+}
