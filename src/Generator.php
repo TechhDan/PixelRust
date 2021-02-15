@@ -122,11 +122,9 @@ class Generator
         $x = null;
         $y = null;
         while (!$x && !$y) {
-            /*$row = mt_rand($this->rows/2 - 20, $this->rows/2 + 20);
-            $column = mt_rand($this->columns/2 - 20, $this->columns/2 + 20);*/
 
-            $row = mt_rand($this->rows/2 - 1, $this->rows/2 + 1);
-            $column = mt_rand($this->columns/2 - 1, $this->columns/2 + 1);
+            $row = mt_rand($this->rows/2 - 10, $this->rows/2 + 10);
+            $column = mt_rand($this->columns/2 - 10, $this->columns/2 + 10);
 
             // Check if set
             $topLeft = $map[$row - 1][$column - 1] ?? false;

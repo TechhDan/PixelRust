@@ -20,8 +20,8 @@ class Game {
     this.themeSong.sound.volume = .5;
     this.gameStarted = false;
     Promise.all([Loader.loadImage('tiles', 'assets/SpriteSheet.png')]).then(loaded => {
-      //this.connection = new WebSocket('ws://localhost:8081');
-      this.connection = new WebSocket('wss://techdesign.io/wss/');
+      this.connection = new WebSocket('ws://localhost:8081');
+      //this.connection = new WebSocket('wss://techdesign.io/wss/');
       this.connection.onmessage = (e) => {
         this.onMessageHandler(JSON.parse(e.data));
       };
@@ -31,7 +31,7 @@ class Game {
   onMessageHandler(data) {
     if (data.action == 'initialUpdate') {
       this.initialUpdate(data);
-      setTimeout(() => this.themeSong.play(), 5000);
+      //setTimeout(() => this.themeSong.play(), 5000);
     }
 
     if (data.action == 'update') {
@@ -176,7 +176,6 @@ class Game {
       );
     });
     //this.treeMonster.update(delta, this.player);
-    //this.camera.update();
     this.connection.send(JSON.stringify({
       down: this.keyboard.isDown(this.keyboard.down),
       left: this.keyboard.isDown(this.keyboard.left),
@@ -253,12 +252,12 @@ class Game {
 
   _drawLayer(layer) {
 
-    let startCol = Math.floor(this.camera.x / this.map.tsize);
-    let endCol = startCol + (this.camera.width / this.map.tsize);
-    let startRow = Math.floor(this.camera.y / this.map.tsize);
-    let endRow = startRow + (this.camera.height / this.map.tsize);
-    let offsetX = -this.camera.x + startCol * this.map.tsize;
-    let offsetY = -this.camera.y + startRow * this.map.tsize;
+    let startCol = Math.floor(this.camera.x / this.map.tsize),
+      endCol = startCol + Math.ceil(this.camera.width / this.map.tsize),
+      startRow = Math.floor(this.camera.y / this.map.tsize),
+      endRow = startRow + Math.ceil(this.camera.height / this.map.tsize),
+      offsetX = -this.camera.x + startCol * this.map.tsize,
+      offsetY = -this.camera.y + startRow * this.map.tsize;
 
     for (let c = startCol; c <= endCol; c++) {
       for (let r = startRow; r <= endRow; r++) {
@@ -267,7 +266,7 @@ class Game {
         let x = (c - startCol) * this.map.tsize + offsetX;
         let y = (r - startRow) * this.map.tsize + offsetY;
 
-        if (tile !== 0) { // 0 => empty tile
+        if (tile != undefined && tile !== 0) { // 0 => empty tile
           this.ctx.drawImage(
             this.tileAtlas, // image
             this.map.sprites[tile].x, // source x

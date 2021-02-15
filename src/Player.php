@@ -44,6 +44,8 @@ class Player
             $this->x += $dirx * $this->speed * (float) $input['delta'];
             $this->y += $diry * $this->speed * (float) $input['delta'];
         }
+
+        $this->collide($dirx, $diry, $input['delta']);
     }
 
     public function getX()
@@ -79,5 +81,11 @@ class Player
     public function getAttack()
     {
         return (bool) $this->attack;
+    }
+
+    private function collide($dirx, $diry, $delta)
+    {
+        return false;
+        $left = $this->x - $this->width / 2;
     }
 }

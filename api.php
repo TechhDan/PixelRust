@@ -13,8 +13,8 @@ $server = IoServer::factory(
             new PixelRustAPI()
         )
     ),
-    // 8081 // local
-    3000
+    8081 // local
+    //3000
 );
 
 $server->run();
